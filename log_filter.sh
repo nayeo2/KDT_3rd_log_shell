@@ -33,22 +33,33 @@ for logfile in "$target_folder"/logcontroller.*; do
     
     # 로그 파일의 내용을 한 줄씩 처리
     while IFS= read -r line; do
-        # 첫 글자에 따라 파일에 추가
+        # 첫 글자에 따라 처리
         case "${line:0:1}" in
             l)
                 echo "$line" >> "$list_file"
                 ;;
-            v)
-                echo "$line" >> "$view_file"
-                ;;
-            c)
-                echo "$line" >> "$cart_file"
-                ;;
-            o)
-                echo "$line" >> "$order_file"
+            v|c|o)
+                # 7번째 필드 추출
+                field=$(echo "$line" | awk '{print $7}')
+                
+                # 필드 값에 따라 적절한 파일에 추가
+                case "$field" in
+                    order)
+                        echo "$line" >> "$order_file"
+                        ;;
+                    view)
+                        echo "$line" >> "$view_file"
+                        ;;
+                    cart)
+                        echo "$line" >> "$cart_file"
+                        ;;
+                    *)
+                        # 다른 경우는 무시
+                        ;;
+                esac
                 ;;
             *)
-                # 다른 경우는 무시
+                # 첫 글자가 l, v, c, o 가 아닌 경우 무시
                 ;;
         esac
     done < "$logfile"
@@ -56,9 +67,9 @@ for logfile in "$target_folder"/logcontroller.*; do
     echo "$logfile processed"
 done
 
-# 날짜가 동일한 집계 로그 파일이 존재하면 삭제 후 처리
+# 날짜가 동일한 집계 로그 파일이 존재하면 빈 파일을 처리
 for file in "$list_file" "$view_file" "$cart_file" "$order_file"; do
-    # 동일 날짜의 파일이 빈 경우 "no"라는 메시지를 추가
+    # 파일이 빈 경우 "no"라는 메시지를 추가
     if [ ! -s "$file" ]; then
         echo "no" > "$file"
     fi
