@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Variables의 local_infile ON 상태로 수정해야합니다.
+
 # MySQL 접속 정보
 MYSQL_HOST="f9f032df-a7af-4c06-8247-601832f6ef39.internal.kr1.mysql.rds.nhncloudservice.com"
 MYSQL_USER="user"
