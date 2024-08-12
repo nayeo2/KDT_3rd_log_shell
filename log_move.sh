@@ -17,7 +17,3 @@ sudo cp "$bk_dir"/logcontroller."$work_target_ymd"_* "$target_dir"/
 
 # 병합할 파일들을 병합하여 하나의 파일로 저장
 cat "$target_dir"/logcontroller."$work_target_ymd"_* > "$merged_log_file"
-
-# 병합된 파일의 크기와 내용을 확인 (선택사항)
-echo "Merged log file created: $merged_log_file"
-ls -lh "$merged_log_file"
