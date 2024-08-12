@@ -7,6 +7,7 @@ OLD_CRON_JOB="*/5 * * * * sh /home/ubuntu/log_move.sh"
 NEW_CRON_JOBS=(
     "* * * * * sh /home/ubuntu/log_move.sh"
     "* * * * * sh /home/ubuntu/log_filter.sh"
+    "* * * * * sh /home/ubuntu/load_infile.sh"
 )
 
 # 현재 사용자 크론탭을 임시 파일에 백업
