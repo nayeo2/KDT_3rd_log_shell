@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 로그 저장 장소 및 백업 장소 정의
-bk_dir="/home/ubuntu/logs"        # 로그 저장 장소
-work_dir="/home/ubuntu/log_backups" # 로그 1차 백업 장소
+bk_dir="logs"        # 로그 저장 장소
+work_dir="log_backups" # 로그 1차 백업 장소
 
 # 날짜를 기반으로 작업할 폴더와 파일 정의
 work_target_ymd=$(date +%F)
